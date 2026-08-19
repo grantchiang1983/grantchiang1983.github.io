@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grant's Workspace | 專案導航中心</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 50%, #030712 100%);
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(99, 102, 241, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-purple: #818cf8;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* 背景流光裝飾球 */
+    .glow-orb {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+    .orb-1 { top: -100px; left: -100px; background: #6366f1; }
+    .orb-2 { top: 20%; right: -150px; background: #ec4899; }
+    .orb-3 { bottom: -100px; left: 30%; background: #06b6d4; }
+    .container {
+      width: 100%;
+      max-width: 1040px;
+      padding: 48px 24px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    /* 頂部 Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    .greeting h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .greeting p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .header-time {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 10px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    /* 區塊標題 */
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .section-title h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hint-badge {
+      font-size: 0.75rem;
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    /* 專案卡片網格 */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .project-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+    }
+    .card-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .icon-box {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .icon-box.todo {
+      background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+    }
+    .icon-box.youtube {
+      background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+      box-shadow: 0 8px 20px rgba(244, 63, 94, 0.35);
+    }
+    .card-title-group h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .card-title-group span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .card-desc {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .card-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-launch {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.25s ease;
+    }
+    .btn-launch.todo {
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    }
+    .btn-launch.todo:hover {
+      background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+    .btn-launch.youtube {
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+    }
+    .btn-launch.youtube:hover {
+      background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+      box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
+    }
+    .btn-github {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    /* 頁腳 Footer */
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 24px 0 10px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- 背景光暈 -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="container">
+    <!-- 頂部資訊列 -->
+    <header>
+      <div class="user-profile">
+        <img class="avatar" src="https://github.com/grantchiang1983.png" alt="Grant Chiang">
+        <div class="greeting">
+          <h1 id="greeting-text">早安，Grant 👋</h1>
+          <p>歡迎回到專案導航中心 (Workspace)</p>
+        </div>
+      </div>
+      <div class="header-time">
+        <i data-lucide="clock" style="width: 18px; height: 18px; color: #818cf8;"></i>
+        <span id="live-time">--:--:--</span>
+      </div>
+    </header>
+    <!-- 專案卡片列表 -->
+    <div class="section-title">
+      <h2><i data-lucide="layout-grid" style="width: 20px; height: 20px; color: #818cf8;"></i> 常用專案 Quick Launch</h2>
+      <span class="hint-badge">💡 支援鍵盤按鍵 [1] 或 [2] 快速開啟</span>
+    </div>
+    <div class="project-grid">
+      <!-- 專案 1：To-Do List -->
+      <div class="project-card">
+        <div class="card-badge">1</div>
+        <div>
+          <div class="card-header">
+            <div class="icon-box todo">
+              <i data-lucide="check-square" style="width: 28px; height: 28px;"></i>
+            </div>
+            <div class="card-title-group">
+              <h3>To-Do List</h3>
+              <span>工作清單與待辦管理</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            功能齊全的工作事項管理工具，支援狀態切換、優先級標記與即時數據統計，提升日常工作效率。
+          </p>
+          <div class="tag-group">
+            <span class="tag">📋 效率工具</span>
+            <span class="tag">⚡ 快速記錄</span>
+            <span class="tag">💾 LocalStorage</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a id="link-todo" href="https://grantchiang1983.github.io/To-Do-List/" class="btn-launch todo">
+            <span>開啟專案</span>
+            <i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="https://github.com/grantchiang1983/To-Do-List" target="_blank" class="btn-github" title="查看 GitHub 原始碼">
+            <i data-lucide="github" style="width: 20px; height: 20px;"></i>
+          </a>
+        </div>
+      </div>
+      <!-- 專案 2：YouTuber Controller -->
+      <div class="project-card">
+        <div class="card-badge">2</div>
+        <div>
+          <div class="card-header">
+            <div class="icon-box youtube">
+              <i data-lucide="play-square" style="width: 28px; height: 28px;"></i>
+            </div>
+            <div class="card-title-group">
+              <h3>YouTuber Controller</h3>
+              <span>YouTube 影片控制中心</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            專為影音播放打造的控制介面，提供便捷的播放操控、快捷鍵與影片多功能面板。
+          </p>
+          <div class="tag-group">
+            <span class="tag">🎬 影音控制</span>
+            <span class="tag">📺 YouTube API</span>
+            <span class="tag">🎮 快捷操作</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a id="link-youtube" href="https://grantchiang1983.github.io/youtuber-controller/" class="btn-launch youtube">
+            <span>開啟專案</span>
+            <i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="https://github.com/grantchiang1983/youtuber-controller" target="_blank" class="btn-github" title="查看 GitHub 原始碼">
+            <i data-lucide="github" style="width: 20px; height: 20px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- 頁尾 -->
+    <footer>
+      <div>© 2026 <a href="https://github.com/grantchiang1983" target="_blank">Grant Chiang</a> · All Rights Reserved</div>
+      <div>託管於 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></div>
+    </footer>
+  </div>
+  <script>
+    lucide.createIcons();
+    // 實時時鐘與問候語
+    function updateClock() {
+      const now = new Date();
+      const hours = now.getHours();
+      const timeStr = now.toLocaleTimeString('zh-TW', { hour12: false });
+      document.getElementById('live-time').textContent = timeStr;
+      let greeting = '你好';
+      if (hours >= 5 && hours < 12) greeting = '早安';
+      else if (hours >= 12 && hours < 18) greeting = '午安';
+      else greeting = '晚安';
+      document.getElementById('greeting-text').textContent = `${greeting}，Grant 👋`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+    // 鍵盤數字快捷鍵支援
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '1') {
+        window.location.href = document.getElementById('link-todo').href;
+      } else if (e.key === '2') {
+        window.location.href = document.getElementById('link-youtube').href;
+      }
+    });
+  </script>
+</body>
+</html>
