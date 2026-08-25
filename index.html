@@ -193,6 +193,10 @@
       background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
       box-shadow: 0 8px 20px rgba(244, 63, 94, 0.35);
     }
+    .icon-box.space {
+      background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #a855f7 100%);
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
+    }
     .card-title-group h3 {
       font-size: 1.25rem;
       font-weight: 700;
@@ -255,6 +259,13 @@
     .btn-launch.youtube:hover {
       background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
       box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
+    }
+    .btn-launch.space {
+      background: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #9333ea 100%);
+    }
+    .btn-launch.space:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #4f46e5 50%, #7e22ce 100%);
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.45);
     }
     .btn-github {
       padding: 12px;
@@ -319,7 +330,7 @@
     <!-- 專案卡片列表 -->
     <div class="section-title">
       <h2><i data-lucide="layout-grid" style="width: 20px; height: 20px; color: #818cf8;"></i> 常用專案 Quick Launch</h2>
-      <span class="hint-badge">💡 支援鍵盤按鍵 [1] 或 [2] 快速開啟</span>
+      <span class="hint-badge">💡 支援鍵盤按鍵 [1]、[2] 或 [3] 快速開啟</span>
     </div>
     <div class="project-grid">
       <!-- 專案 1：To-Do List -->
@@ -354,6 +365,7 @@
           </a>
         </div>
       </div>
+
       <!-- 專案 2：YouTuber Controller -->
       <div class="project-card">
         <div class="card-badge">2</div>
@@ -386,7 +398,42 @@
           </a>
         </div>
       </div>
+
+      <!-- 專案 3：3D 太陽系與銀河系天文台 -->
+      <div class="project-card">
+        <div class="card-badge">3</div>
+        <div>
+          <div class="card-header">
+            <div class="icon-box space">
+              <i data-lucide="orbit" style="width: 28px; height: 28px;"></i>
+            </div>
+            <div class="card-title-group">
+              <h3>3D 太陽系與銀河系天文台</h3>
+              <span>克卜勒軌道 · NASA 2K · 最近黑洞</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            基於 Three.js 與真實 NASA 天文數據開發，支援日心黃道方位角、公轉速度、地月日食/月食、銀河系宏觀星盤與已知最近黑洞 Gaia BH1 即時觀測。
+          </p>
+          <div class="tag-group">
+            <span class="tag">🪐 Three.js 3D</span>
+            <span class="tag">🌍 NASA 2K 材質</span>
+            <span class="tag">🕳️ 最近黑洞 Gaia BH1</span>
+            <span class="tag">🌌 銀河系星盤</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a id="link-space" href="https://grantchiang1983.github.io/solar-system-3d/" class="btn-launch space">
+            <span>開啟專案</span>
+            <i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="https://github.com/grantchiang1983/solar-system-3d" target="_blank" class="btn-github" title="查看 GitHub 原始碼">
+            <i data-lucide="github" style="width: 20px; height: 20px;"></i>
+          </a>
+        </div>
+      </div>
     </div>
+
     <!-- 頁尾 -->
     <footer>
       <div>© 2026 <a href="https://github.com/grantchiang1983" target="_blank">Grant Chiang</a> · All Rights Reserved</div>
@@ -415,6 +462,8 @@
         window.location.href = document.getElementById('link-todo').href;
       } else if (e.key === '2') {
         window.location.href = document.getElementById('link-youtube').href;
+      } else if (e.key === '3') {
+        window.location.href = document.getElementById('link-space').href;
       }
     });
   </script>
