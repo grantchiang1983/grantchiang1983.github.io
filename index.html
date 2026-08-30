@@ -330,7 +330,7 @@
     <!-- 專案卡片列表 -->
     <div class="section-title">
       <h2><i data-lucide="layout-grid" style="width: 20px; height: 20px; color: #818cf8;"></i> 常用專案 Quick Launch</h2>
-      <span class="hint-badge">💡 支援鍵盤按鍵 [1]、[2] 或 [3] 快速開啟</span>
+      <span class="hint-badge">💡 支援鍵盤按鍵 [1]、[2]、[3] 或 [4] 快速開啟</span>
     </div>
     <div class="project-grid">
       <!-- 專案 1：To-Do List -->
@@ -432,6 +432,40 @@
           </a>
         </div>
       </div>
+      <!-- 專案 4：佈告欄 (Bulletin Board) -->
+      <div class="project-card">
+        <div class="card-badge">4</div>
+        <div>
+          <div class="card-header">
+            <div class="icon-box bulletin" style="background: rgba(13, 52, 108, 0.4); border-color: rgba(2, 132, 199, 0.4); color: #38bdf8; display: flex; align-items: center; justify-content: center; width: 54px; height: 54px; border-radius: 16px; border: 1px solid rgba(2, 132, 199, 0.4);">
+              <i data-lucide="layout-dashboard" style="width: 28px; height: 28px;"></i>
+            </div>
+            <div class="card-title-group">
+              <h3>佈告欄 (Bulletin Board)</h3>
+              <span>氣象署觀測 · Windy · AVGO · 樂居</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            中央氣象署 CWA 官方風格自由佈局儀表板，整合 Windy 全球即時氣溫動態、CWA 颱風消息與雷達合成回波、NASDAQ 博通 (AVGO) 即時行情及樂居【惠宇雲品】實價登錄。
+          </p>
+          <div class="tag-group">
+            <span class="tag">🌦️ CWA 氣象觀測</span>
+            <span class="tag">🌍 Windy 氣溫</span>
+            <span class="tag">📈 AVGO 美股行情</span>
+            <span class="tag">🏡 樂居實價登錄</span>
+            <span class="tag">📐 自由拖曳佈局</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a id="link-bulletin" href="https://grantchiang1983.github.io/bulletin-board/" class="btn-launch" style="background: linear-gradient(135deg, #0d346c 0%, #0284c7 100%);">
+            <span>開啟專案</span>
+            <i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="https://github.com/grantchiang1983/grantchiang1983.github.io/tree/main/bulletin-board" target="_blank" class="btn-github" title="查看 GitHub 原始碼">
+            <i data-lucide="github" style="width: 20px; height: 20px;"></i>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- 頁尾 -->
@@ -464,6 +498,8 @@
         window.location.href = document.getElementById('link-youtube').href;
       } else if (e.key === '3') {
         window.location.href = document.getElementById('link-space').href;
+      } else if (e.key === '4') {
+        window.location.href = document.getElementById('link-bulletin').href;
       }
     });
   </script>
