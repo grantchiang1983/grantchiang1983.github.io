@@ -10,15 +10,16 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 50%, #030712 100%);
-      --card-bg: rgba(255, 255, 255, 0.04);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover-border: rgba(99, 102, 241, 0.4);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent-purple: #818cf8;
-      --accent-rose: #fb7185;
-      --accent-emerald: #34d399;
+      --bg-color: #f7f6f1;
+      --bg-gradient: radial-gradient(circle at 50% -10%, #ffffff 0%, #f6f5ef 45%, #ece9de 100%);
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(102, 136, 99, 0.18);
+      --card-hover-border: rgba(102, 136, 99, 0.45);
+      --text-main: #243324;
+      --text-muted: #5e6e5c;
+      --accent-green: #668863;
+      --accent-sage: #b6c0a8;
+      --accent-caramel: #b38a59;
     }
     * {
       margin: 0;
@@ -28,6 +29,7 @@
     body {
       font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
       background: var(--bg-gradient);
+      background-color: var(--bg-color);
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
@@ -40,17 +42,16 @@
     /* 背景流光裝飾球 */
     .glow-orb {
       position: absolute;
-      width: 500px;
-      height: 500px;
+      width: 520px;
+      height: 520px;
       border-radius: 50%;
       filter: blur(140px);
       z-index: 0;
       pointer-events: none;
-      opacity: 0.35;
     }
-    .orb-1 { top: -100px; left: -100px; background: #6366f1; }
-    .orb-2 { top: 20%; right: -150px; background: #ec4899; }
-    .orb-3 { bottom: -100px; left: 30%; background: #06b6d4; }
+    .orb-1 { top: -100px; left: -100px; background: #b6c0a8; opacity: 0.45; }
+    .orb-2 { top: 22%; right: -140px; background: #b38a59; opacity: 0.28; }
+    .orb-3 { bottom: -100px; left: 25%; background: #668863; opacity: 0.3; }
     .container {
       width: 100%;
       max-width: 1040px;
@@ -67,7 +68,7 @@
       align-items: center;
       margin-bottom: 48px;
       padding-bottom: 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(102, 136, 99, 0.16);
       flex-wrap: wrap;
       gap: 16px;
     }
@@ -80,13 +81,14 @@
       width: 56px;
       height: 56px;
       border-radius: 16px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      border: 2px solid rgba(102, 136, 99, 0.25);
+      box-shadow: 0 8px 20px rgba(50, 70, 48, 0.12);
     }
     .greeting h1 {
       font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: -0.5px;
+      color: var(--text-main);
     }
     .greeting p {
       font-size: 0.88rem;
@@ -96,14 +98,16 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       padding: 10px 18px;
       border-radius: 14px;
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(102, 136, 99, 0.2);
       font-size: 0.9rem;
       font-weight: 600;
-      color: #cbd5e1;
+      color: var(--text-main);
+      box-shadow: 0 4px 16px rgba(102, 136, 99, 0.08);
     }
     /* 區塊標題 */
     .section-title {
@@ -111,6 +115,8 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .section-title h2 {
       font-size: 1.15rem;
@@ -122,11 +128,12 @@
     }
     .hint-badge {
       font-size: 0.75rem;
-      background: rgba(99, 102, 241, 0.15);
-      color: #a5b4fc;
-      padding: 4px 10px;
+      background: rgba(182, 192, 168, 0.32);
+      color: #3b4e3a;
+      padding: 5px 12px;
       border-radius: 20px;
-      border: 1px solid rgba(99, 102, 241, 0.3);
+      border: 1px solid rgba(102, 136, 99, 0.25);
+      font-weight: 500;
     }
     /* 專案卡片網格 */
     .project-grid {
@@ -137,8 +144,8 @@
     }
     .project-card {
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 28px;
@@ -147,12 +154,12 @@
       justify-content: space-between;
       position: relative;
       transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 10px 30px rgba(60, 80, 58, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
     }
     .project-card:hover {
       transform: translateY(-6px);
       border-color: var(--card-hover-border);
-      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+      box-shadow: 0 20px 35px rgba(102, 136, 99, 0.16);
     }
     .card-badge {
       position: absolute;
@@ -161,14 +168,14 @@
       width: 28px;
       height: 28px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(102, 136, 99, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.8rem;
       font-weight: 700;
-      color: var(--text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #4b6248;
+      border: 1px solid rgba(102, 136, 99, 0.18);
     }
     .card-header {
       display: flex;
@@ -186,25 +193,29 @@
       color: #fff;
     }
     .icon-box.todo {
-      background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+      background: linear-gradient(135deg, #668863 0%, #4d6d4a 100%);
+      box-shadow: 0 8px 20px rgba(102, 136, 99, 0.28);
     }
     .icon-box.youtube {
-      background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
-      box-shadow: 0 8px 20px rgba(244, 63, 94, 0.35);
+      background: linear-gradient(135deg, #b38a59 0%, #946f40 100%);
+      box-shadow: 0 8px 20px rgba(179, 138, 89, 0.28);
     }
     .icon-box.space {
-      background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #a855f7 100%);
-      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
+      background: linear-gradient(135deg, #446853 0%, #2f4e3c 100%);
+      box-shadow: 0 8px 20px rgba(68, 104, 83, 0.28);
+    }
+    .icon-box.bulletin {
+      background: linear-gradient(135deg, #5c7b6d 0%, #436254 100%);
+      box-shadow: 0 8px 20px rgba(92, 123, 109, 0.28);
     }
     .icon-box.piano {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
-      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+      background: linear-gradient(135deg, #c2935b 0%, #9a703d 100%);
+      box-shadow: 0 8px 20px rgba(179, 138, 89, 0.28);
     }
     .card-title-group h3 {
       font-size: 1.25rem;
       font-weight: 700;
-      color: #fff;
+      color: var(--text-main);
     }
     .card-title-group span {
       font-size: 0.8rem;
@@ -212,7 +223,7 @@
     }
     .card-desc {
       font-size: 0.92rem;
-      color: #cbd5e1;
+      color: #435442;
       line-height: 1.6;
       margin-bottom: 22px;
     }
@@ -227,9 +238,9 @@
       font-weight: 600;
       padding: 4px 10px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #cbd5e1;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(182, 192, 168, 0.26);
+      color: #384c36;
+      border: 1px solid rgba(102, 136, 99, 0.18);
     }
     .card-actions {
       display: flex;
@@ -251,41 +262,46 @@
       transition: all 0.25s ease;
     }
     .btn-launch.todo {
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      background: linear-gradient(135deg, #668863 0%, #52724f 100%);
     }
     .btn-launch.todo:hover {
-      background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, #587955 0%, #436041 100%);
+      box-shadow: 0 6px 18px rgba(102, 136, 99, 0.35);
     }
     .btn-launch.youtube {
-      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+      background: linear-gradient(135deg, #b38a59 0%, #99703f 100%);
     }
     .btn-launch.youtube:hover {
-      background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
-      box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
+      background: linear-gradient(135deg, #a47b4a 0%, #885f2f 100%);
+      box-shadow: 0 6px 18px rgba(179, 138, 89, 0.35);
     }
     .btn-launch.space {
-      background: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #9333ea 100%);
+      background: linear-gradient(135deg, #446853 0%, #345341 100%);
     }
     .btn-launch.space:hover {
-      background: linear-gradient(135deg, #0369a1 0%, #4f46e5 50%, #7e22ce 100%);
-      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.45);
+      background: linear-gradient(135deg, #3a5b48 0%, #294434 100%);
+      box-shadow: 0 6px 18px rgba(68, 104, 83, 0.35);
+    }
+    .btn-launch.bulletin {
+      background: linear-gradient(135deg, #5c7b6d 0%, #496659 100%);
+    }
+    .btn-launch.bulletin:hover {
+      background: linear-gradient(135deg, #506f61 0%, #3d564b 100%);
+      box-shadow: 0 6px 18px rgba(92, 123, 109, 0.35);
     }
     .btn-launch.piano {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: #0f172a;
-      font-weight: 700;
+      background: linear-gradient(135deg, #b38a59 0%, #99703f 100%);
     }
     .btn-launch.piano:hover {
-      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.45);
+      background: linear-gradient(135deg, #a47b4a 0%, #885f2f 100%);
+      box-shadow: 0 6px 18px rgba(179, 138, 89, 0.35);
     }
     .btn-github {
       padding: 12px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-muted);
+      background: rgba(102, 136, 99, 0.08);
+      border: 1px solid rgba(102, 136, 99, 0.2);
+      color: #556753;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -293,17 +309,17 @@
       transition: all 0.2s ease;
     }
     .btn-github:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
+      background: rgba(102, 136, 99, 0.18);
+      color: #243324;
     }
     /* 頁腳 Footer */
     footer {
       margin-top: auto;
       text-align: center;
-      padding: 24px 0 10px;
-      color: var(--text-muted);
+      padding: 28px 0 16px;
+      color: #728170;
       font-size: 0.85rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(102, 136, 99, 0.16);
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -312,10 +328,12 @@
       gap: 12px;
     }
     footer a {
-      color: var(--accent-purple);
+      color: #557752;
       text-decoration: none;
+      font-weight: 500;
     }
     footer a:hover {
+      color: #385135;
       text-decoration: underline;
     }
   </style>
@@ -336,13 +354,13 @@
         </div>
       </div>
       <div class="header-time">
-        <i data-lucide="clock" style="width: 18px; height: 18px; color: #818cf8;"></i>
+        <i data-lucide="clock" style="width: 18px; height: 18px; color: #668863;"></i>
         <span id="live-time">--:--:--</span>
       </div>
     </header>
     <!-- 專案卡片列表 -->
     <div class="section-title">
-      <h2><i data-lucide="layout-grid" style="width: 20px; height: 20px; color: #818cf8;"></i> 常用專案 Quick Launch</h2>
+      <h2><i data-lucide="layout-grid" style="width: 20px; height: 20px; color: #668863;"></i> 常用專案 Quick Launch</h2>
       <span class="hint-badge">💡 支援鍵盤按鍵 [1]、[2]、[3]、[4] 或 [5] 快速開啟</span>
     </div>
     <div class="project-grid">
@@ -450,7 +468,7 @@
         <div class="card-badge">4</div>
         <div>
           <div class="card-header">
-            <div class="icon-box bulletin" style="background: rgba(13, 52, 108, 0.4); border-color: rgba(2, 132, 199, 0.4); color: #38bdf8; display: flex; align-items: center; justify-content: center; width: 54px; height: 54px; border-radius: 16px; border: 1px solid rgba(2, 132, 199, 0.4);">
+            <div class="icon-box bulletin">
               <i data-lucide="layout-dashboard" style="width: 28px; height: 28px;"></i>
             </div>
             <div class="card-title-group">
@@ -470,7 +488,7 @@
           </div>
         </div>
         <div class="card-actions">
-          <a id="link-bulletin" href="https://grantchiang1983.github.io/bulletin-board/" class="btn-launch" style="background: linear-gradient(135deg, #0d346c 0%, #0284c7 100%);">
+          <a id="link-bulletin" href="https://grantchiang1983.github.io/bulletin-board/" class="btn-launch bulletin">
             <span>開啟專案</span>
             <i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i>
           </a>
