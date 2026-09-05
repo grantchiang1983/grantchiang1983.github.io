@@ -197,6 +197,10 @@
       background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #a855f7 100%);
       box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
     }
+    .icon-box.piano {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+    }
     .card-title-group h3 {
       font-size: 1.25rem;
       font-weight: 700;
@@ -267,6 +271,15 @@
       background: linear-gradient(135deg, #0369a1 0%, #4f46e5 50%, #7e22ce 100%);
       box-shadow: 0 4px 15px rgba(14, 165, 233, 0.45);
     }
+    .btn-launch.piano {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .btn-launch.piano:hover {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.45);
+    }
     .btn-github {
       padding: 12px;
       border-radius: 14px;
@@ -330,7 +343,7 @@
     <!-- 專案卡片列表 -->
     <div class="section-title">
       <h2><i data-lucide="layout-grid" style="width: 20px; height: 20px; color: #818cf8;"></i> 常用專案 Quick Launch</h2>
-      <span class="hint-badge">💡 支援鍵盤按鍵 [1]、[2]、[3] 或 [4] 快速開啟</span>
+      <span class="hint-badge">💡 支援鍵盤按鍵 [1]、[2]、[3]、[4] 或 [5] 快速開啟</span>
     </div>
     <div class="project-grid">
       <!-- 專案 1：To-Do List -->
@@ -466,6 +479,41 @@
           </a>
         </div>
       </div>
+
+      <!-- 專案 5：Piano Sheet Studio -->
+      <div class="project-card">
+        <div class="card-badge">5</div>
+        <div>
+          <div class="card-header">
+            <div class="icon-box piano">
+              <i data-lucide="music" style="width: 28px; height: 28px;"></i>
+            </div>
+            <div class="card-title-group">
+              <h3>Piano Sheet Studio</h3>
+              <span>音樂鋼琴五線譜互動系統</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            現代化擬真 3D 鋼琴與雙行大譜表五線譜系統，支援即時音符與和弦辨識、經典名曲示範播放、跟彈識譜練習、QWERTY 鍵盤演奏及 Web MIDI 實體電子琴隨插即彈。
+          </p>
+          <div class="tag-group">
+            <span class="tag">🎹 擬真 3D 鋼琴</span>
+            <span class="tag">🎼 大譜表五線譜</span>
+            <span class="tag">🧠 即時和弦辨識</span>
+            <span class="tag">🎯 跟彈識譜練習</span>
+            <span class="tag">🔌 Web MIDI 支援</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a id="link-piano" href="https://grantchiang1983.github.io/piano-sheet-studio/" class="btn-launch piano">
+            <span>開啟專案</span>
+            <i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="https://github.com/grantchiang1983/piano-sheet-studio" target="_blank" class="btn-github" title="查看 GitHub 原始碼">
+            <i data-lucide="github" style="width: 20px; height: 20px;"></i>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- 頁尾 -->
@@ -500,6 +548,8 @@
         window.location.href = document.getElementById('link-space').href;
       } else if (e.key === '4') {
         window.location.href = document.getElementById('link-bulletin').href;
+      } else if (e.key === '5') {
+        window.location.href = document.getElementById('link-piano').href;
       }
     });
   </script>
